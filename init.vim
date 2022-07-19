@@ -18,6 +18,16 @@ set expandtab "tab inserts space characters
 set tabstop=4 "tab equals 4 spaces
 set shiftwidth=4 "set identation to the same values as tabstop
 set number "show absolute line numbers
+set ignorecase "case insensitive search
+set smartcase "case insensitive search just when searching all lower letters
+"TODO set diffopt+=vertical
+set nowritebackup "don't create backup files
+"TODO shortmess+=c
+set signcolumn=yes "add a column to the left of the numbers column for signs from lsp for example
+set updatetime=520 "update time in milliseconds
+set undofile "persist undo tree
+"TODO check termguicolors if needed
+set termguicolors "colors
 
 let mapleader = " " "leader is space
 nnoremap <leader>v :e $MYVIMRC<CR>
