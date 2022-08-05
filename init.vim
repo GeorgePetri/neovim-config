@@ -47,3 +47,10 @@ let g:lightline = {
         \   'gitbranch': 'gitbranch#name'
         \ },
         \ }
+
+"fzf-lua options
+"TODO register ui select
+"TODO learn which grep variotion to use
+"TODO fix colors
+noremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
+noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
