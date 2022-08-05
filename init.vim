@@ -31,3 +31,19 @@ set termguicolors "colors
 
 let mapleader = " " "leader is space
 nnoremap <leader>v :e $MYVIMRC<CR>
+
+"theme
+colorscheme PaperColor
+set background=light
+
+" 'itchyny/vim-gitbranch' and 'itchyny/lightline.vim' options
+let g:lightline = {
+        \ 'colorscheme': 'PaperColor',
+        \ 'active': {
+        \   'left': [ [ 'mode', 'paste' ],
+        \       [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+        \ },
+        \ 'component_function': {
+        \   'gitbranch': 'gitbranch#name'
+        \ },
+        \ }
