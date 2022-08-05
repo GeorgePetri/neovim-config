@@ -26,8 +26,6 @@ set nowritebackup "don't create backup files
 set signcolumn=yes "add a column to the left of the numbers column for signs from lsp for example
 set updatetime=520 "update time in milliseconds
 set undofile "persist undo tree
-"TODO check termguicolors if needed
-set termguicolors "colors
 
 let mapleader = " " "leader is space
 nnoremap <leader>v :e $MYVIMRC<CR>
@@ -50,7 +48,7 @@ let g:lightline = {
 
 "fzf-lua options
 "TODO register ui select
-"TODO learn which grep variotion to use
 "TODO fix colors
+"TODO check rg, fzf, fg configs and get a good setup
 noremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
