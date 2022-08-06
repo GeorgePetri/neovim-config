@@ -31,8 +31,8 @@ let mapleader = " " "leader is space
 nnoremap <leader>v :e $MYVIMRC<CR>
 
 "theme
-colorscheme PaperColor
 set background=light
+colorscheme PaperColor
 
 " 'itchyny/vim-gitbranch' and 'itchyny/lightline.vim' options
 let g:lightline = {
@@ -47,8 +47,18 @@ let g:lightline = {
         \ }
 
 "fzf-lua options
+lua << EOF
+require'fzf-lua'.setup {
+    fzf_colors = {
+        ["gutter"] = { "bg", "Normal" },
+        ["hl"] = { "fg", "Statement" },
+        ["hl+"] = { "fg", "Statement" }
+    }
+}
+EOF
 "TODO register ui select
 "TODO fix colors
 "TODO check rg, fzf, fg configs and get a good setup
-noremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
+nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
+vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
