@@ -3,7 +3,8 @@ call plug#begin()
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'itchyny/vim-gitbranch'
   Plug 'itchyny/lightline.vim'
-  Plug 'dense-analysis/ale'
+  "todo fix this, some svelte files fail due to this
+  "Plug 'dense-analysis/ale' 
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -63,12 +64,6 @@ nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
 vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
 
-"svelte-lsp
-"todo this crashes on empty index file
-lua << EOF
-require'lspconfig'.svelte.setup{}
-EOF
-
 "nvim-cmp
 "todo setup tab vs enter insert
 "todo setup like intellij
@@ -90,5 +85,22 @@ cmp.setup {
     sources = {
         { name = 'nvim_lsp' }
     }
+}
+EOF
+
+"lsp-config
+"todo this crashes on empty index file
+lua << EOF
+local opts = { noremap=true, silent=true }
+local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
+-- TypeScript
+require'lspconfig'.tsserver.setup{
+    capabilities = capabilities
+}
+
+-- Svelte
+require'lspconfig'.svelte.setup{
+    capabilities = capabilities
 }
 EOF
