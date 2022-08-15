@@ -62,3 +62,33 @@ EOF
 nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
 vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
+
+"svelte-lsp
+"todo this crashes on empty index file
+lua << EOF
+require'lspconfig'.svelte.setup{}
+EOF
+
+"nvim-cmp
+"todo setup tab vs enter insert
+"todo setup like intellij
+lua << EOF
+local cmp = require'cmp'
+cmp.setup {
+    mapping = {
+        ['<Down>'] = cmp.mapping.select_next_item(),
+        ['<Up>'] = cmp.mapping.select_prev_item(),
+        ['<CR>'] = cmp.mapping.confirm({
+            behaviour = cmp.ConfirmBehavior.Replace,
+            select = true,
+        }),
+        ['<Tab>'] = cmp.mapping.confirm({
+            behaviour = cmp.ConfirmBehavior.Replace,
+            select = true,
+        })
+    },
+    sources = {
+        { name = 'nvim_lsp' }
+    }
+}
+EOF
