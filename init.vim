@@ -95,12 +95,17 @@ local opts = { noremap=true, silent=true }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- TypeScript
-require'lspconfig'.tsserver.setup{
+require'lspconfig'.tsserver.setup {
     capabilities = capabilities
 }
 
 -- Svelte
-require'lspconfig'.svelte.setup{
-    capabilities = capabilities
+require'lspconfig'.svelte.setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        --todo Reuse these
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    end
 }
 EOF
