@@ -68,6 +68,7 @@ noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
 "nvim-cmp
 "todo setup tab vs enter insert
 "todo setup like intellij
+"install required snipped engine
 lua << EOF
 local cmp = require'cmp'
 cmp.setup {
