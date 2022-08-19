@@ -50,13 +50,15 @@ let g:lightline = {
 
 "fzf-lua options
 lua << EOF
-require'fzf-lua'.setup {
+local fzf = require'fzf-lua'
+fzf.setup {
     fzf_colors = {
         ["gutter"] = { "bg", "Normal" },
         ["hl"] = { "fg", "Statement" },
         ["hl+"] = { "fg", "Statement" }
     }
 }
+fzf.register_ui_select()
 EOF
 "TODO register ui select
 "TODO fix colors
@@ -108,6 +110,10 @@ require'lspconfig'.svelte.setup {
         --todo Reuse these
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'i', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+        --todo bind ctrl space
     end
 }
 EOF
