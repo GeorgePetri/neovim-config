@@ -9,6 +9,7 @@ call plug#begin()
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'ibhagwan/fzf-lua', {'branch' : 'main' }
+  Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
 call plug#end()
 
 "neovim options
@@ -107,5 +108,18 @@ require'lspconfig'.svelte.setup {
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     end
+}
+EOF
+
+"treesitter
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = { "javascript", "typescript", "tsx", "html", "svelte" },
+    sync_install = false,
+    auto_install = true,
+    highlight = {
+        enable = true,
+        additional_vim_regex_highlighting = false
+    }
 }
 EOF
