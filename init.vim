@@ -97,23 +97,28 @@ EOF
 lua << EOF
 local opts = { noremap=true, silent=true }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+function bind_common(client, bufnr)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'i', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
+        --todo bind ctrl space
+end
 
 -- TypeScript
 require'lspconfig'.tsserver.setup {
-    capabilities = capabilities
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        bind_common(client, bufnr)
+    end
 }
 
 -- Svelte
 require'lspconfig'.svelte.setup {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
-        --todo Reuse these
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'i', '<A-CR>', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>k', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>', opts)
-        --todo bind ctrl space
+        bind_common(client, bufnr)
     end
 }
 EOF
