@@ -118,6 +118,17 @@ require'lspconfig'.svelte.setup {
         bind_common(client, bufnr)
     end
 }
+
+-- C#
+require'lspconfig'.omnisharp.setup {
+    capabilities = capabilities,
+    on_attach = function(client, bufnr)
+        bind_common(client, bufnr)
+    end,
+    cmd = { }
+    --todo config options
+    --todo config cmd
+}
 EOF
 
 "treesitter
