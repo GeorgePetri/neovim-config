@@ -3,8 +3,7 @@ call plug#begin()
   Plug 'NLKNguyen/papercolor-theme'
   Plug 'itchyny/vim-gitbranch'
   Plug 'itchyny/lightline.vim'
-  "todo fix this, some svelte files fail due to this
-  "Plug 'dense-analysis/ale' 
+  Plug 'dense-analysis/ale'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -36,7 +35,7 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 set background=light
 colorscheme PaperColor
 
-" 'itchyny/vim-gitbranch' and 'itchyny/lightline.vim' options
+"vim-gitbranch and lightline.vim
 let g:lightline = {
         \ 'colorscheme': 'PaperColor',
         \ 'active': {
@@ -48,7 +47,7 @@ let g:lightline = {
         \ },
         \ }
 
-"fzf-lua options
+"fzf-lua
 lua << EOF
 local fzf = require'fzf-lua'
 fzf.setup {
@@ -60,7 +59,6 @@ fzf.setup {
 }
 fzf.register_ui_select()
 EOF
-"TODO register ui select
 "TODO fix colors
 "TODO check rg, fzf, fg configs and get a good setup
 nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
@@ -93,7 +91,6 @@ cmp.setup {
 EOF
 
 "lsp-config
-"todo this crashes on empty index file
 lua << EOF
 local opts = { noremap=true, silent=true }
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
