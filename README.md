@@ -10,5 +10,5 @@ Install instructions:
 - For Typescript LSP support install the [language server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#tsserver)
 - For Svelte LSP support install the [language server](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#svelte)
 - For C# Install [omnisharp-roslyn](https://github.com/OmniSharp/omnisharp-roslyn) by extracting the latest release in `/omnisharp`
-- Install treesitte [Requirements](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
+- Install treesitter [Requirements](https://github.com/nvim-treesitter/nvim-treesitter#requirements)
 - Run `:PlugInstall`

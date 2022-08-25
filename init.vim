@@ -129,7 +129,7 @@ require'lspconfig'.omnisharp.setup {
         vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', '<cmd>lua require(\'fzf-lua\').lsp_references()<CR>', opts)
-        //todo test
+        --todo test
         vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     end,
     cmd = { "/omnisharp/OmniSharp", "--languageserver", "--hostPID", tostring(pid) },
