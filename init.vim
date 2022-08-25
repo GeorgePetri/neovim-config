@@ -120,14 +120,21 @@ require'lspconfig'.svelte.setup {
 }
 
 -- C#
+--todo add other c# bindings
 require'lspconfig'.omnisharp.setup {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
         bind_common(client, bufnr)
+
+        vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>gr', '<cmd>lua require(\'fzf-lua\').lsp_references()<CR>', opts)
+        //todo test
+        vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
     end,
-    cmd = { }
-    --todo config options
-    --todo config cmd
+    cmd = { "/omnisharp/OmniSharp", "--languageserver", "--hostPID", tostring(pid) },
+    enable_roslyn_analyzers = true,
+    organize_imports_on_format = true
 }
 EOF
 
