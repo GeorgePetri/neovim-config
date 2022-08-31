@@ -6,6 +6,9 @@ call plug#begin()
   Plug 'dense-analysis/ale'
   Plug 'hrsh7th/nvim-cmp'
   Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+  Plug 'rafamadriz/friendly-snippets'
   Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'ibhagwan/fzf-lua', {'branch' : 'main' }
   Plug 'nvim-treesitter/nvim-treesitter', { 'do': ':TSUpdate' }
@@ -66,12 +69,19 @@ vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
 
 "nvim-cmp
+"todo ctrl space
 "todo setup tab vs enter insert
 "todo setup like intellij
-"install required snipped engine
+"todo try super tab
+"todo this has a lot of tweaking options, try them
 lua << EOF
 local cmp = require'cmp'
 cmp.setup {
+    snippet = {
+        expand = function(args)
+            vim.fn["vsnip#anonymous"](args.body)
+      end,
+    },
     mapping = {
         ['<Down>'] = cmp.mapping.select_next_item(),
         ['<Up>'] = cmp.mapping.select_prev_item(),
@@ -85,7 +95,8 @@ cmp.setup {
         })
     },
     sources = {
-        { name = 'nvim_lsp' }
+        { name = 'nvim_lsp' },
+        { name = 'vsnip' }
     }
 }
 EOF
