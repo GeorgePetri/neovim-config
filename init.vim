@@ -15,7 +15,6 @@ call plug#begin()
 call plug#end()
 
 "neovim options
-"TODO completeopt
 set completeopt=menu,menuone,noselect "autocomplete options: show menu, show menu even if just one entry, do not autoselect
 set mouse=a "enable mouse
 set expandtab "tab inserts space characters
@@ -69,11 +68,11 @@ vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
 noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
 
 "nvim-cmp
-"todo ctrl space
 "todo setup tab vs enter insert
 "todo setup like intellij
 "todo try super tab
 "todo this has a lot of tweaking options, try them
+"todo cmp / and :
 lua << EOF
 local cmp = require'cmp'
 cmp.setup {
@@ -92,6 +91,9 @@ cmp.setup {
         ['<Tab>'] = cmp.mapping.confirm({
             behaviour = cmp.ConfirmBehavior.Replace,
             select = true,
+        }),
+        ["<C-Space>"] = cmp.mapping.complete({
+            reason = cmp.ContextReason.Auto,
         })
     },
     sources = {
