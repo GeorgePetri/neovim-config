@@ -37,6 +37,15 @@ nnoremap <leader>v :e $MYVIMRC<CR>
 set background=light
 colorscheme PaperColor
 
+"plugin-configs
+:lua require"fzf"
+
+"todo move this
+"TODO check rg, fzf, fg configs and get a good setup
+nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
+vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
+noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
+
 "vim-gitbranch and lightline.vim
 let g:lightline = {
         \ 'colorscheme': 'PaperColor',
@@ -48,24 +57,6 @@ let g:lightline = {
         \   'gitbranch': 'gitbranch#name'
         \ },
         \ }
-
-"fzf-lua
-lua << EOF
-local fzf = require'fzf-lua'
-fzf.setup {
-    fzf_colors = {
-        ["gutter"] = { "bg", "Normal" },
-        ["hl"] = { "fg", "Statement" },
-        ["hl+"] = { "fg", "Statement" }
-    }
-}
-fzf.register_ui_select()
-EOF
-"TODO fix colors
-"TODO check rg, fzf, fg configs and get a good setup
-nnoremap <leader>fg <cmd>lua require('fzf-lua').grep()<CR>
-vnoremap <leader>fg <cmd>lua require('fzf-lua').grep_visual()<CR>
-noremap <leader>ff <cmd>lua require('fzf-lua').files()<CR>
 
 "nvim-cmp
 "todo setup tab vs enter insert
@@ -79,7 +70,7 @@ cmp.setup {
     snippet = {
         expand = function(args)
             vim.fn["vsnip#anonymous"](args.body)
-      end,
+        end,
     },
     mapping = {
         ['<Down>'] = cmp.mapping.select_next_item(),
